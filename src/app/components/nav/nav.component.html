@@ -1,0 +1,82 @@
+<div class="container flex" *ngIf="check()">
+  <div>
+      <button mat-mini-fab color="primary" class="side-controller" (click)="changSideStatus()" aria-label="Example icon button with a menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+  </div>
+
+  <!-- Dietitian nav start -->
+  <div *ngIf="(getRole() == 'Dietitian')">
+    <div *ngIf="this.idName =='nav-open'?true:false">
+      <img class="side-profile-img" src="https://user-images.githubusercontent.com/47815793/132744117-68c16f98-09e6-4fa6-b4fc-5e789e222a15.png">
+        <h1>Pepe Cool</h1>
+        <h3>Dietians/Client</h3>
+      
+      <!-- <button mat-flat-button class="btn-options" color="primary">Basic</button> -->
+      <button mat-flat-button class="btn-options" routerLink="/client/appointment-list"><a >Appointment List</a></button>
+      <button mat-flat-button class="btn-options"  routerLink="/client/client-list"><a >Client List</a></button>
+  
+      <button mat-flat-button class="btn-options"  ><a  (click)="logout()">Logout</a></button>
+  
+    </div>
+    <div *ngIf="this.idName =='nav-open'?false:true">
+      <img  class="side-profile-img-close" src="https://user-images.githubusercontent.com/47815793/132744117-68c16f98-09e6-4fa6-b4fc-5e789e222a15.png"> 
+        
+      <!-- <button mat-mini-fab class="side-button">Basic</button> -->
+      <button mat-mini-fab class="side-button"  routerLink="/client/appointment-list"><a >Appointment List</a></button>
+      <button mat-mini-fab class="side-button"  routerLink="/client/client-list"><a >Client List</a></button>
+      <button mat-mini-fab class="side-button"  ><a  (click)="logout()">Logout</a></button>
+    </div>
+  </div>
+  <!-- Dietitian nav end -->
+
+  <!-- client nav start -->
+  <div *ngIf="(getRole() == 'Client')">
+    <div *ngIf="this.idName =='nav-open'?true:false">
+      <img class="side-profile-img" src="https://user-images.githubusercontent.com/47815793/132744117-68c16f98-09e6-4fa6-b4fc-5e789e222a15.png">
+        <h1>Pepe Cool</h1>
+        <h3>Dietians/Client</h3>
+      
+      <!-- <button mat-flat-button class="btn-options" color="primary">Basic</button> -->
+      <button mat-flat-button class="btn-options" color="primary"><a routerLink="/profile">Appointment List</a></button>
+      <button mat-flat-button class="btn-options" color="primary"><a routerLink="/client/client-list">Client List</a></button>
+  
+      <button mat-flat-button class="btn-options" color="primary" ><a  (click)="logout()">Logout</a></button>
+  
+    </div>
+    <div *ngIf="this.idName =='nav-open'?false:true">
+      <img  class="side-profile-img-close" src="https://user-images.githubusercontent.com/47815793/132744117-68c16f98-09e6-4fa6-b4fc-5e789e222a15.png"> 
+        
+      <!-- <button mat-mini-fab class="side-button">Basic</button> -->
+      <button mat-mini-fab class="side-button" color="primary"><a routerLink="/client/client-list">Appointment List</a></button>
+      <button mat-mini-fab class="side-button" color="primary"><a routerLink="/client/client-list" href="">Client List</a></button>
+      <button mat-flat-button class="btn-options" color="primary" ><a  (click)="logout()">Logout</a></button>
+    </div>
+  </div>
+  <!-- client nav end -->
+
+</div>
+
+<div class="container flex" *ngIf="!check()">
+  <div>
+      <button mat-mini-fab color="primary" class="side-controller" (click)="changSideStatus()" aria-label="Example icon button with a menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+  </div>
+  <div *ngIf="this.idName =='nav-open'?true:false">
+    
+    
+    <!-- <button mat-flat-button class="btn-options" color="primary">Basic</button> -->
+    <button mat-flat-button class="btn-options" color="primary"><a routerLink="/login">Login</a></button>
+    <button mat-flat-button class="btn-options" color="primary"><a routerLink="/register">Register</a></button>
+
+  </div>
+  <div *ngIf="this.idName =='nav-open'?false:true">
+    <img  class="side-profile-img-close" src="https://user-images.githubusercontent.com/47815793/132744117-68c16f98-09e6-4fa6-b4fc-5e789e222a15.png"> 
+      
+   <button mat-mini-fab class="side-button">Basic</button> 
+    <button mat-mini-fab class="side-button" color="primary"><a routerLink="/login">Login</a></button>
+    <button mat-mini-fab class="side-button" color="primary"><a routerLink="/register">Client List</a></button>
+  
+  </div>
+</div>

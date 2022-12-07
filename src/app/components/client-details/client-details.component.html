@@ -1,0 +1,37 @@
+<div>
+  Water(L) : {{lastMes.totalBodyWater}}
+  Protein(kg) : {{lastMes.protein}}
+  Mineral(kg) : {{lastMes.mineral}}
+  Body Fat(kg) : {{lastMes.bodyFatWeight}}
+  Weight(kg) : {{lastMes.weight}}
+  Target Weight :  {{lastMes.targetWeight}}
+  Visceral Fat - Target Visceral Fat : {{lastMes.visceralFatLevel}} -{{lastMes.targetVisceralFatLevel}}
+</div>
+
+  <div style="width: 51rem;" >
+    <plotly-plot 
+    [data]="graph1.data"
+    [layout]="graph1.layout"
+    [useResizeHandler]="true"></plotly-plot>
+  </div>
+  <div style="width: 51rem;">
+    <plotly-plot 
+    [data]="graph2.data"
+    [layout]="graph2.layout"
+    [useResizeHandler]="true"></plotly-plot>
+  </div>
+  <div style="width: 51rem;">
+    <plotly-plot 
+    [data]="graph3.data"
+    [layout]="graph3.layout"
+    [useResizeHandler]="true"></plotly-plot>
+  </div>
+  <div style="width: 51rem;">
+    <plotly-plot 
+    [data]="graph4.data"
+    [layout]="graph4.layout"
+    [useResizeHandler]="true"></plotly-plot>
+  </div>  
+  
+  
+  <button *ngIf="clientId!=undefined" ><a routerLink="/DietMaker/{{clientId}}">Make Diet List</a></button>

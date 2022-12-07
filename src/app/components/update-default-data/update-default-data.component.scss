@@ -1,0 +1,19 @@
+.general-div{
+    margin-top: 15rem;
+display: flex;
+justify-content: space-evenly;
+gap: 2rem;
+}
+.card{
+    border-radius:2rem;
+    width:25rem;
+}
+.select-thing{
+    width: 100%;
+    height: 3rem;
+}
+.update-dieatian{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+}

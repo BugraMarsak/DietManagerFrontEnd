@@ -1,0 +1,32 @@
+.flexy{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.nav-open{
+  background-color: #b6ab8a;
+  // background-color: #59C1BD;
+  width: 20%;
+  overflow: hidden;
+}
+.nav-close{
+  background-color: #b6ab8a;
+  width: 5%;
+  overflow: hidden;
+}
+.main-open{
+  background-color: #E5DCC3;
+  // background-color: #A0E4CB;
+  width: 95%;
+  overflow: auto;
+}
+.main-close{
+  background-color: #E5DCC3;
+  width: 80%;
+  overflow: auto;
+}
+.test{
+  height: auto;
+  width: auto ;
+}

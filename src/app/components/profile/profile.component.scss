@@ -1,0 +1,28 @@
+.flex-cont{
+    display: flex;
+    justify-content:space-evenly;
+
+}
+.head{
+    display: flex;
+    justify-content:space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.btn-options{
+    height: 100%;
+}
+.border-content{
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.border-content-detail{
+    display: flex;
+    justify-content:space-evenly;
+    flex-direction: column;
+    gap: 2rem;
+   
+}
+
+

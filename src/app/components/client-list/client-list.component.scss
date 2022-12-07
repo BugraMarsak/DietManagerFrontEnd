@@ -1,0 +1,21 @@
+div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:  wrap;
+    mat-card{
+        display: flex;
+        align-items: center;
+        width: 12.5rem;
+        margin: 1rem;
+    }
+}
+.card{
+    background-color: #d3c498;
+    color: white;
+}
+
+.det-btn{
+    border-style: solid;
+    background-color: #C7BEA2;
+    color: black;
+}

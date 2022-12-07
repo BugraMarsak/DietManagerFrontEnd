@@ -1,0 +1,9 @@
+.center{
+    text-align: center;
+}
+.for-padding{
+    padding-top: 4%;
+    /* padding-bottom: 15rem; */
+    width:100% !important;
+    height: 100% !important;
+}

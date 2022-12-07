@@ -1,0 +1,51 @@
+div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  .side-controller{
+    margin-bottom: 3rem;
+    background-color: #C7BEA2;
+    margin-top: 2rem;
+  }
+  div{
+    align-items: center;
+    h1{
+    margin-bottom: 0;
+    } 
+    img{
+      border-radius: 50%;
+      height: 15%;
+    }
+    .btn-options{
+      background-color: #C7BEA2;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      width: 50%;
+      height: 30%;
+    }
+  
+  }
+  
+}
+.side-button{
+  background-color: #C7BEA2;
+  margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.side-profile-img-close{
+  border-radius: 50%;
+  height: 50%;
+  width: 60%;
+  margin-bottom: 2rem;
+}
+.btn-options-close{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 30%;
+  height: 30%;
+}
+.side-profile-img{
+  border-radius: 50%;
+  height: 30%;
+  width: 40%;
+}

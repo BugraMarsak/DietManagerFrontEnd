@@ -1,0 +1,55 @@
+<div class="flex-cont">
+    <div class="flex-cont-item">
+        
+        <div class="head">
+            <h1>Info</h1>
+            <button mat-flat-button class="btn-options" color="primary" routerLink="/profile/update-info" >Edit</button>
+        </div>
+        <div style="border-style: solid; width: 15rem;">
+            <div class="border-content">
+                <div class="border-content-detail">
+                    <div>Age : {{clientDefaultData.age}}</div>
+                    <div>Height : {{height}}</div>
+                    <div>Gender : {{clientDefaultData.gender}}</div>
+                </div>
+
+            </div>
+        
+        </div>
+    </div>
+    <div class="flex-cont-item">
+        <div class="head">
+            <h1>Allergies</h1>
+            <button mat-flat-button class="btn-options" color="primary" routerLink="/profile/allergies">Edit</button>
+        </div>
+        <div style="border-style: solid; width: 15rem;">
+            <div class="border-content">
+                <div class="border-content-detail">
+                    <h3  *ngFor="let x of allergenNameArray">
+                        {{x}}
+                    </h3>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="flex-cont-item">
+        <div class="head">
+            <h1>Diet Lists</h1>
+            <button mat-flat-button class="btn-options" color="primary">Edit</button>
+        </div>
+    <div style="border-style: solid; width: 15rem;">
+        
+        <div class="border-content">
+            <div class="border-content-detail">
+                <div *ngFor="let x of clientDietList">
+                    
+                    <button style="background-color: #C7BEA2; border: solid;" mat-button (click)="openDialog(x.session)">{{x.dietDate.toString().slice(0,10)}} Diet List</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+

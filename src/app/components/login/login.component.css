@@ -1,0 +1,11 @@
+.forcenter{
+    text-align: center;
+    align-items: center;
+    
+}
+.for-padding{
+    padding-top: 13%;
+    /* padding-bottom: 15rem; */
+    width:100% !important;
+    height: 100% !important;
+}

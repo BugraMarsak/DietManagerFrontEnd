@@ -1,0 +1,13 @@
+<div class=" container">
+    <!-- ilk elemanin left margini 2  olacak sekilde ayarlanacak -->
+  <input type="text"  [(ngModel)]="filterText">
+
+    <mat-card class="card" *ngFor="let x of ClientLists | clientfilter:filterText" >
+        <mat-card-title>{{x.clientFullName}}</mat-card-title>
+        <mat-card-actions>
+          <button class="det-btn" mat-button><a routerLink="/client/client-datas/{{x.clientId}}">Check Client Details</a></button>
+        </mat-card-actions>
+    </mat-card>
+                            
+            
+</div>

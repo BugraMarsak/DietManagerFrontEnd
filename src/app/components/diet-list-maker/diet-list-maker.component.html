@@ -1,0 +1,84 @@
+<div class="container outline">
+  <div class="client-info">
+    
+    <h2>Client Info</h2>
+
+    <div style="border-style: groove;
+    border-radius: 5px;">
+      <div style="margin: 2rem;">
+        <div class="card-info">
+          <div>
+            Age
+            <hr>
+            {{clientDefData.age}}
+          </div>
+          <div>
+            Height(m)
+            <hr>
+            {{clientDefData.height}}
+          </div>
+          <div>
+            Gender
+            <hr>
+            {{clientDefData.gender}}
+          </div>
+        </div>
+        <div class="card-info">
+          <div>
+            BKI
+            <hr>
+            {{lastMeas.bki}}
+          </div>
+          <div>
+            Weight(Kg)
+            <hr>
+            {{lastMeas.weight}}
+          </div>
+          <div>
+              IKA
+            <hr>
+            {{lastMeas.ika}}
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div cdkDropListGroup class="two-div">
+    <div class="example-container foodlist">
+      <h2 style="text-align: center;">Food List</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="todo"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item.foodName}} -  Calories:{{item.calories}}</div>
+      </div>
+    </div>
+    <div class="dietlist">
+      <h2>Diet List</h2>
+      <div *ngFor="let dones of done;let i = index"  class="example-container "> 
+        <label for="">Hour:</label><select (change)="hourChange($event,i)" ><option [value]="hour" *ngFor="let hour of hours">{{hour}}</option></select>
+
+        <label for="">Minute:</label><select (change)="minChange($event,i)" ><option [value]="m" *ngFor="let m of min">{{m}}</option></select>
+        
+        <button (click)="deleteThis(i)">delete</button>
+        <div
+          cdkDropList
+          [cdkDropListData]="done[i]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box"*ngFor="let item of dones"  cdkDrag>{{item.foodName}} -  Calories:{{item.calories}}</div>
+        </div>
+      </div>
+      
+      <button (click)="test()">Add new meal</button>
+      <button (click)="saveDietList()">Save List</button>
+    </div>
+   
+
+
+  </div>
+  
+</div>

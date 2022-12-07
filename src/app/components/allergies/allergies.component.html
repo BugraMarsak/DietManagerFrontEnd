@@ -1,0 +1,46 @@
+<div class="general-div">
+    <div class="under-div">
+        <div class="card">
+            <h1 style="text-align: center; margin-top: 4rem;">Your Allergies</h1>
+            <div class="card-top">
+                <div class="alergies">
+                    <select  [(ngModel)]="selectedOpt" name="" id="">
+                        <option *ngFor="let x of allergens"  [value]="x.id">
+                            {{x.allergenName}}
+                        </option>
+                    </select>
+                    <button  (click)="updatex()">Add</button>
+                    <button (click)="savex()">
+                        Save
+                    </button>
+                </div>
+                <div>
+                    <h2 *ngFor="let x of allergenNameArray">{{x}}</h2>
+                </div>
+            </div>
+            
+            
+        
+            
+            
+            
+        </div>
+        <div>
+            <p style="font-size: 2rem;">About Allergens <br></p>
+            <p style="font-size: 1rem; margin-top: 0.4rem;">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>
+                Vitae ultricies leo integer malesuada nunc. Integer quis auctor elit sed vulputate mi sit amet mauris. Tristique senectus et<br>
+                netus et malesuada fames. Dolor sit amet consectetur adipiscing elit duis tristique. Suscipit tellus mauris a diam maecenas <br>
+                sed enim ut. Turpis massa tincidunt dui ut ornare lectus sit amet. At elementum eu facilisis sed. Iaculis at erat pellentesque <br>
+                adipiscing commodo elit at. Dui sapien eget mi proin sed. Bibendum est ultricies integer quis auctor elit sed vulputate. <br>
+                Dolor sit amet consectetur adipiscing elit ut aliquam purus.</p>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+

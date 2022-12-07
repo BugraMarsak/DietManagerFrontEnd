@@ -1,0 +1,34 @@
+.alergies{
+    display: flex;
+    flex-direction:column;
+    align-content: space-between;
+gap: 4rem;
+
+}
+.under-div{
+
+display: flex;
+    flex-direction:column;
+    align-content: space-between;
+gap: 4rem;
+}
+
+.card-top{
+    display: flex;
+    flex-direction:row;
+    align-content: space-between;
+    gap: 8rem;
+    padding: 5rem;
+}
+.general-div{
+    display: flex;
+    align-content: space-between;
+    justify-content:center;
+    
+    margin-top: 7%;
+
+}
+select{
+    height: 3rem;
+    width: 10rem;
+}
