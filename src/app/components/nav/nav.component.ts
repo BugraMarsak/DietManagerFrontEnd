@@ -20,9 +20,7 @@ showFiller = false;
     // })
   }
 
-  getRole(){
-    return this.tokenClaim.getclaims();
-  }
+
 
   @Output() onHide = new EventEmitter<boolean>();
   setHide(){
@@ -38,18 +36,14 @@ showFiller = false;
     this.onHide.emit(this.idName =="nav-open"?true:false);
   }
 
+  getRole(){
+    return this.tokenClaim.getclaims();
+  }
   check(){
     var x = localStorage.getItem("token")
-    if(x ==null){
-      return false
-    }
-    else{
-      return true
-    }
+    return x==null?false:true
   }
   logout(){
-    console.log(123);
-    
     localStorage.removeItem("token")
     setTimeout(() => {
       this.router.navigate(['/']);

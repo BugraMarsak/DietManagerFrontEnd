@@ -11,7 +11,7 @@ export class TokenClaim {
 
   decode(){
     if(!localStorage.getItem("token")){
-       return
+       return ''
     }
     
     var token:string = localStorage.getItem("token")
@@ -26,16 +26,25 @@ export class TokenClaim {
 
   getid(){
     var token = this.decode()   
+    if(token==''){
+      return "0"
+    }
     return token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
   }
   
   getclaims(){
     var token = this.decode();
+    if(token==''){
+      return " "
+    }
     return token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
   }
 
   getName(){
     var token = this.decode();
+    if(token==''){
+      return " "
+    }
     return token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
   }
 

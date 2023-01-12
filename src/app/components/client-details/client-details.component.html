@@ -1,37 +1,103 @@
-<div>
-  Water(L) : {{lastMes.totalBodyWater}}
-  Protein(kg) : {{lastMes.protein}}
-  Mineral(kg) : {{lastMes.mineral}}
-  Body Fat(kg) : {{lastMes.bodyFatWeight}}
-  Weight(kg) : {{lastMes.weight}}
-  Target Weight :  {{lastMes.targetWeight}}
-  Visceral Fat - Target Visceral Fat : {{lastMes.visceralFatLevel}} -{{lastMes.targetVisceralFatLevel}}
+
+
+
+
+
+<!-- Client Datalist -->
+<section>
+
+  <aside>
+    <h2><i class="fa-solid fa-chart-simple"></i>Client Data</h2>
+    <div class="info">
+      <div class="info-item">
+        <div><i class="fa-solid fa-droplet fa-xl"></i>
+          <p>Water (L)</p>
+        </div>
+        <hr>
+        <p>{{totalBodyWater}}</p>
+      </div>
+
+      <div class="info-item">
+        <div><i class="fa-solid fa-dumbbell fa-xl"></i>
+          <p>Protein (kg)</p>
+        </div>
+        <hr>
+        <p>{{protein}}</p>
+      </div>
+
+      <div class="info-item">
+        <div><i class="fa-brands fa-first-order-alt fa-xl"></i>
+          <p>Mineral (kg)</p>
+        </div>
+        <hr>
+        <p>{{mineral}}</p>
+      </div>
+
+      <div class="info-item">
+        <div><i class="fa-solid fa-oil-can fa-xl"></i>
+          <p>Body Fat (kg)</p>
+        </div>
+        <hr>
+        <p>{{bodyFatWeight}}</p>
+      </div>
+
+      <div class="info-item">
+        <div><i class="fa-solid fa-weight-hanging fa-xl"></i>
+          <p>Weight (kg)</p>
+        </div>
+        <hr>
+        <p>{{weight}}</p>
+      </div>
+
+      <div class="info-item">
+        <div><i class="fa-solid fa-trophy fa-xl"></i>
+          <p>Target Weight</p>
+        </div>
+        <hr>
+        <p>{{targetWeight}}</p>
+      </div>
+
+      <div></div>
+
+      <div class="info-item">
+        <div><i class="fa-solid fa-calculator fa-xl"></i>
+          <p>Visceral / Target Fat</p>
+        </div>
+        <hr>
+        <p>{{visceralFatLevel}}/{{targetVisceralFatLevel}}</p>
+      </div>
+
+      <div></div>
+    </div>
+
+
+    
+  </aside>
+  
+</section>
+
+<div class="btn3">
+  <button *ngIf="clientId!=undefined"><a routerLink="/DietMaker/{{clientId}}">Make Diet List</a></button>
+  <button (click)="showDialog()" *ngIf="clientId!=undefined"><a >See Latest Blood Result</a></button>
 </div>
 
-  <div style="width: 51rem;" >
-    <plotly-plot 
-    [data]="graph1.data"
-    [layout]="graph1.layout"
-    [useResizeHandler]="true"></plotly-plot>
+<div class="graphs"> 
+  <div >
+    <plotly-plot [data]="graph1.data" [layout]="graph1.layout" [useResizeHandler]="true"></plotly-plot>
   </div>
-  <div style="width: 51rem;">
-    <plotly-plot 
-    [data]="graph2.data"
-    [layout]="graph2.layout"
-    [useResizeHandler]="true"></plotly-plot>
+  <div >
+    <plotly-plot [data]="graph2.data" [layout]="graph2.layout" [useResizeHandler]="true"></plotly-plot>
   </div>
-  <div style="width: 51rem;">
-    <plotly-plot 
-    [data]="graph3.data"
-    [layout]="graph3.layout"
-    [useResizeHandler]="true"></plotly-plot>
+  <div >
+    <plotly-plot [data]="graph3.data" [layout]="graph3.layout" [useResizeHandler]="true"></plotly-plot>
   </div>
-  <div style="width: 51rem;">
-    <plotly-plot 
-    [data]="graph4.data"
-    [layout]="graph4.layout"
-    [useResizeHandler]="true"></plotly-plot>
-  </div>  
-  
-  
-  <button *ngIf="clientId!=undefined" ><a routerLink="/DietMaker/{{clientId}}">Make Diet List</a></button>
+  <div >
+    <plotly-plot [data]="graph4.data" [layout]="graph4.layout" [useResizeHandler]="true"></plotly-plot>
+  </div>
+</div>
+
+
+<p-dialog header="PDF Shower"   [(visible)]="display" [modal]="true" 
+    [draggable]="false" >
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl "></iframe>
+</p-dialog>

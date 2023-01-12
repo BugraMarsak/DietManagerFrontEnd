@@ -23,6 +23,8 @@ export class ClientDietListService {
     get<ListResponseModel<ClientListDTO>>(`${this.url}/GetById?DietianId=${id}`)
   }
   add(clientDietList:ClientDietList[]):Observable<ResponseModel>{    
+    console.log(clientDietList);
+    
     return this.httpClient.post<ResponseModel>(this.url+"/add",clientDietList);
   }
   delete(clientDietList:ClientDietList):Observable<ResponseModel>{
@@ -40,7 +42,7 @@ export class ClientDietListService {
   getDietListBySessionAndClientId(id:number,session:number){
     return this.
     httpClient.
-    get<ListResponseModel<ClientDietList>>(`${this.url}/getDietListByClientId?ClientId=${id}&Session=${session}`)
+    get<ListResponseModel<ClientDietList>>(`${this.url}/getDietListBySessionAndClientId?ClientId=${id}&Session=${session}`)
   }
 
 

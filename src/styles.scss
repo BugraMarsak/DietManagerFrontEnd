@@ -1,4 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./app/app.component.scss";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: $beige;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
+}
+
+button {
+    background: transparent;
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $java;
+
+    &:hover {
+        background: $brown;
+    }
+}

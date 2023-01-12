@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DietianClientLists } from './../../model/dietianClientLists';
 import { DieatianDTO } from './../../model/DieatianDTO';
 import { UserService } from './../../services/user.service';
@@ -18,7 +19,8 @@ export class UpdateDefaultDataComponent implements OnInit {
     private measurementResultService:MeasurementResultService,
     private tokenClaim:TokenClaim,
     private userService:UserService,
-    private dietianClientListService:DietianClientListService
+    private dietianClientListService:DietianClientListService,
+    private snackBar: MatSnackBar
   ) { }
   data:ClientDefaultData
   dietians:DieatianDTO[]
@@ -35,7 +37,15 @@ export class UpdateDefaultDataComponent implements OnInit {
   }
   
   update(){
-    this.measurementResultService.updatedef(this.data).subscribe()
+    this.measurementResultService.updatedef(this.data).subscribe(res=>{
+      this.snackBar.open('Updated', 'Close', {
+        duration: 5000
+      });
+    },reserror=>{
+      this.snackBar.open('a problem has occurred', 'Close', {
+        duration: 5000
+      });
+    });
   }
   //user info
 
@@ -60,7 +70,15 @@ export class UpdateDefaultDataComponent implements OnInit {
     })
   }
   updateDieatian(){
-    this.dietianClientListService.update(this.selectedDietian).subscribe()
+    this.dietianClientListService.update(this.selectedDietian).subscribe(res=>{
+      this.snackBar.open('Updated', 'Close', {
+        duration: 5000
+      });
+    },reserror=>{
+      this.snackBar.open('a problem has occurred', 'Close', {
+        duration: 5000
+      });
+    });
   }
   //user dieatian info
 }

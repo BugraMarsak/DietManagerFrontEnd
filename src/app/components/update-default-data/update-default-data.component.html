@@ -1,111 +1,48 @@
-<!-- 
-<div class="modal modal-signin  d-block for-padding" style="background-color: #E5DCC3; " tabindex="-1" role="dialog" id="modalSignin">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content rounded-5 shadow">
-        
-        <div style="display:flex; justify-content: space-evenly; flex-direction:row">
-          <div>
-            <div class="modal-header p-5 pb-4 border-bottom-0">
-              <h2 class="fw-bold mb-0 " style="text-align: center;">Update Info</h2>
-            </div>
-      
-            <div class="modal-body p-5 pt-0">
-    
-                <div class="form-floating mb-3">
-                  <input [(ngModel)]="age"  type="number" class="form-control rounded-4" id="Age" placeholder="name@example.com">
-                  <label for="floatingInput">Age</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input [(ngModel)]="height"  type="number" class="form-control rounded-4" id="Height" placeholder="1,78 - 1,88 - 1,55">
-                  <label for="floatingPassword">Height(m)</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <select [(ngModel)]="gender" name="" id="">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                  </div>
-                <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" (click)="update()">Update</button>
-                
-            </div>
-            
-          </div>
-          <div>
-            <hr style="height:8rem;">
-          </div>
-        </div>
+<div class="container">
 
+  <!-- Update Info -->
+  <div class="card-area">
 
-        
+    <div class="content-area">
+      <h2>Update Info</h2>
+      <div class="grid">
+        <label for="floatingInput">Age</label>
+        <input [(ngModel)]="data.age" type="number" id="Age" placeholder="25">
+
+        <label for="floatingPassword">Height(m)</label>
+        <input [(ngModel)]="data.height" type="number" id="Height" placeholder="1,84">
+
+        <label>Gender</label>
+        <select [(ngModel)]="data.gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
       </div>
+    </div>
+
+    <div class="btn-area">
+      <button (click)="update()">Update</button>
     </div>
   </div>
 
- -->
+  <!-- Update Dieatian -->
+  <div class="card-area">
 
- <div class="general-div">
-    <div class="card">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h2 class="fw-bold mb-0 " style="text-align: center;">Update Info</h2>
+    <div class="content-area">
+      <h2>Update Dieatian</h2>
+      <div class="grid">
+        <label>Dieatian</label>
+        <select [(ngModel)]="selectedDietian.dietianId">
+          <option value="{{dietian.dietianId}}" *ngFor="let dietian of dietians">{{dietian.dietianName}}
+          </option>
+        </select>
       </div>
-
-      <div class="modal-body p-5 pt-0">
-
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="data.age"  type="number" class="form-control rounded-4" id="Age" placeholder="name@example.com">
-            <label for="floatingInput">Age</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input [(ngModel)]="data.height"  type="number" class="form-control rounded-4" id="Height" placeholder="1,78 - 1,88 - 1,55">
-            <label for="floatingPassword">Height(m)</label>
-          </div>
-          <div class="form-floating mb-3">
-              <select class="select-thing" [(ngModel)]="data.gender" name="" id="">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-              </select>
-            </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" (click)="update()">Update</button>
-          
-      </div>
-
     </div>
 
-    <div class="card">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h2 class="fw-bold mb-0 " style="text-align: center;">Update Dieatian</h2>
-      </div>
-
-      <div class="modal-body p-5 pt-0 update-dieatian">
-
-          <div class="form-floating mb-3">
-              <select class="select-thing" [(ngModel)]="selectedDietian.dietianId" name="" id="">
-                  <option value="{{dietian.dietianId}}" *ngFor="let dietian of dietians">{{dietian.dietianName}}</option>
-              </select>
-            </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" (click)="updateDieatian()">Update</button>
-          
-      </div>
-
+    <div class="btn-area">
+      <button (click)="updateDieatian()">Update</button>
     </div>
 
-    <!-- <div class="card">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h2 class="fw-bold mb-0 " style="text-align: center;">Update Info</h2>
-      </div>
+  </div>
 
-      <div class="modal-body p-5 pt-0">
-
-          <div class="form-floating mb-3">
-              <select class="select-thing" [(ngModel)]="gender" name="" id="">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-              </select>
-            </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" (click)="update()">Update</button>
-          
-      </div>
-
-    </div> -->
-
- </div>
+</div>

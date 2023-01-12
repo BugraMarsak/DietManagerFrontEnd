@@ -1,0 +1,29 @@
+<section>
+    <div class="nav-btn">
+        <button routerLink="/">Go Home Page</button>
+
+        <!-- for dietitian -->
+        <button *ngIf="role=='Dietitian'" routerLink="/client/client-list">Go Client List</button>
+        <button *ngIf="role=='Dietitian'" routerLink="/client/client-datas/{{receiverId}}">Go Client Details</button>
+    </div>
+    
+    
+    <div class="messages">
+        <div id="chat" style="overflow: auto; height: 45rem;">
+            <div *ngFor="let  x of MessageDTOList" [class]="userId == x.receiverId?'receiver':'sender'">
+                <h2>{{x.sendTime.toString().substring(0,16).replace("T"," ")}}</h2>
+                <h1  [class]="userId == x.receiverId?'test1':'test2'">{{x.messages}}</h1>
+            </div>
+        </div>
+        
+        
+        
+        
+    </div>
+    <div class="message-send">
+        <input type="text" [(ngModel)]="filter">
+        <button [disabled]="filter==''" (click)="send()"><i class="fa-solid fa-paper-plane fa-xl"></i></button>
+    </div>
+</section>
+
+

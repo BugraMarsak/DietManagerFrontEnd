@@ -1,0 +1,55 @@
+
+@import "../../app.component.scss";
+
+
+.list{
+    margin: 2rem 4rem ;
+    &-appointment{
+
+        text-align: center;
+        .appointments
+        {
+            display: flex;
+            gap: 2rem;
+            flex-wrap:wrap;
+            justify-content: center;
+        }
+        mat-card {
+            @extend %flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.4rem;
+            background: darken($beige, 5%);
+            border-radius: 0.5rem;
+            box-shadow: none;
+            transition: 0.5s all;
+            text-align: center;
+            * {
+                color: $java;
+                margin: 0;
+                padding: 0;
+                transition: 0.5s all;
+            }
+    
+            &:hover {
+                background: darken($beige, 10%);
+    
+                * {
+                    color: $brown;
+                }
+            }
+    
+            mat-card-title {
+                font-size: 1rem;
+            }
+    
+            button {
+                margin-top: 0.6rem;
+                padding:0 0.3rem;
+                border: 2px solid;
+            }
+        }
+    }
+    
+}

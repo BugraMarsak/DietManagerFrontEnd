@@ -1,14 +1,156 @@
-<div class="flexy" *ngIf="!getRouter()">
-    <div  [ngClass]="navClass">
-        <app-nav class="testt" (onHide)="changeHide($event)"></app-nav>
+<!-- Container -->
+<div [className]="(navOn) ? 'navOn' : 'navOff' " *ngIf="!getRouter()">
+
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="buttons">
+
+            <!-- Menu -->
+            <button class="btn1" (click)="openNav()">
+                <i class="fa-solid fa-bars fa-lg"></i>
+            </button>
+
+            <button *ngIf="!check()" class="btn1 dropdown" color="primary"
+            matBadge="{{alertCount}}" matBadgePosition="before" matBadgeColor="accent">
+            <i class="fa-solid fa-bell fa-lg"></i>
+            <div class="dropdown-content">
+                <div *ngFor="let alert of alerts">
+                    <button style="width: 25rem;" routerLink="/chat/{{alert.senderId}}">{{alert.alertName}} - {{alert.alertTime.toString().substring(0,11)}}</button>
+                </div>
+                <div *ngIf="alertCount=='0'">
+                    <h2>You have <b>Not</b> notification</h2>
+                </div>
+            </div>
+            </button>
+            
+
+            <!-- P. Picture -->
+            <span class="pp">
+                <i class="fa-solid fa-user fa-lg"></i>
+            </span>
+            
+            <h1 *ngIf="navOn && !check() ">{{getName()}}</h1>
+
+            <!-- Home -->
+            <button class="btn2" routerLink="/">
+                <i class="fa-solid fa-home fa-lg"></i>
+                <p *ngIf="navOn">Home</p>
+            </button>
+
+
+
+            <!-- Login -->
+            <button *ngIf="check()" class="btn2" routerLink="/login">
+                <i class="fa-solid fa-right-to-bracket fa-lg"></i>
+                <p *ngIf="navOn">Login</p>
+            </button>
+
+            <!-- Register -->
+            <button *ngIf="check()" class="btn2" routerLink="/register">
+                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                <p *ngIf="navOn">Register</p>
+            </button>
+
+
+            <!-- Client -->
+
+            <!-- Profile -->
+            <button *ngIf="!getRole() && !check()" class="btn2" routerLink="/profile">
+                <i class="fa-regular fa-address-card fa-lg"></i>
+                <p *ngIf="navOn">Profile</p>
+            </button>
+
+
+            <button *ngIf="!getRole() && !check()" class="btn2" routerLink="/profile/datas">
+                <i class="fa-solid fa-chart-column fa-xl"></i>
+                <p *ngIf="navOn">Graphs</p>
+            </button>
+
+            <button *ngIf="!getRole() && !check()" (click)="showDialog()" class="btn2">
+                <i class="fa-regular fa-calendar-check fa-xl"></i>
+                <p *ngIf="navOn">Appointment</p>
+            </button>
+            <button *ngIf="!getRole() && !check()" routerLink="{{chatPath}}" class="btn2">
+                <i class="fa-solid fa-comments "></i>
+                <p *ngIf="navOn">Chat</p>
+            </button>
+            <button *ngIf="!getRole() && !check()" (click)="logout()" class="btn2">
+                <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+                <p *ngIf="navOn">Logout</p>
+            </button>
+
+
+            <!-- Dietians -->
+            <button routerLink="/apointmentlist" *ngIf="getRole() && !check()" class="btn2">
+                <i class="fa-regular fa-calendar-check fa-xl"></i>
+                <p *ngIf="navOn">Appointments</p>
+            </button>
+            <button *ngIf="getRole() && !check() " class="btn2" routerLink="/client/client-list">
+                <i class="fa-solid fa-pen-to-square fa-xl"></i>
+                <p *ngIf="navOn" >Clients</p>
+            </button>
+            <button *ngIf="getRole() && !check()" (click)="logout()" class="btn2">
+                <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+                <p *ngIf="navOn">Logout</p>
+            </button>
+
+            
+
+        </div>
     </div>
-    <div [ngClass]="mainClass">
-        <router-outlet></router-outlet>
-    </div>
-</div>
-<div *ngIf="getRouter()">
-    <div >
+
+    <!-- Main -->
+    <div class="main">
         <router-outlet></router-outlet>
     </div>
     
 </div>
+
+<div *ngIf="getRouter()">
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
+
+
+
+
+<!-- Appointment set -->
+<p-dialog header="Get appointment" [breakpoints]="{'1100px': '75vw', '840px': '100vw'}"  style="width:25rem;height:25rem;" [(visible)]="display" [modal]="true" 
+    [draggable]="false" >
+    <div class="make-appointment">
+        <div class="time-setting">
+            <div>
+                <label for="calendar">Appointment Day:</label>
+                <p-calendar (onSelect)="getHours()" [(ngModel)]="selectedDate"></p-calendar>
+            </div>
+            <div>
+                <label for="calendar">Appointment Hour:</label>
+                <Select (change)="modifySelectedDate($event)">
+                    <option *ngFor="let hour of avaibleHours" value="{{hour}}">{{hour}}</option>
+
+                </Select>
+            </div>
+            <div>
+                <label for="calendar">Appointment Hour:</label>
+                <Select (change)="modifyType($event)" name="typeName">
+                    <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+                    
+                </Select>
+            </div>
+            
+        </div>
+        <div class="save-btn">
+            <button (click)="save()" >Save</button> 
+            <button (click)="closeDialog()">Cancel</button>
+        </div>
+        
+    </div>
+    
+</p-dialog>
+
+<!-- /Appointment set -->
+
+
+

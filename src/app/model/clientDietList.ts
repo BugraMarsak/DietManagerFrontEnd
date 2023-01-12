@@ -6,4 +6,5 @@ export interface ClientDietList{
     dietDate?:Date
     note:string
     session:number
+    foodNames?:string[]
 }

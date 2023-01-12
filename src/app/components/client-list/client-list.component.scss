@@ -1,21 +1,69 @@
-div{
-    display: flex;
-    flex-direction: row;
-    flex-wrap:  wrap;
-    mat-card{
-        display: flex;
-        align-items: center;
-        width: 12.5rem;
-        margin: 1rem;
-    }
-}
-.card{
-    background-color: #d3c498;
-    color: white;
-}
+@import "../../app.component.scss";
 
-.det-btn{
-    border-style: solid;
-    background-color: #C7BEA2;
-    color: black;
+
+.list-area {
+    // width: max-content;
+    margin-left: 25%;
+    margin-right: 25%;
+    h2 {
+        @extend %header;
+    }
+
+    .text {
+        @extend %flex;
+        color: $brown;
+        gap: 2rem;
+
+        input {
+            width: 10rem;
+            outline: none;
+            background: transparent;
+            border-style: none none solid none;
+            border-color: $java;
+            caret-color: $java;
+        }
+    }
+
+    .list {
+        height: 50vh;
+        overflow: auto;
+        border: 2px solid $brown;
+        border-radius: 0.5rem;
+        margin-top: 1.5rem;
+
+        mat-card {
+            @extend %flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem;
+            background: darken($beige, 5%);
+            border-radius: 0.5rem;
+            box-shadow: none;
+            transition: 0.5s all;
+
+            * {
+                color: $java;
+                margin: 0;
+                padding: 0;
+                transition: 0.5s all;
+            }
+
+            &:hover {
+                background: darken($beige, 10%);
+
+                * {
+                    color: $brown;
+                }
+            }
+
+            mat-card-title {
+                font-size: 1rem;
+            }
+
+            button {
+                border: none;
+                outline: none;
+            }
+        }
+    }
 }

@@ -1,0 +1,51 @@
+@import "../diet-list-maker/diet-list-maker.component.scss";
+
+section {
+    margin: auto;
+    width: max-content;
+    align-items: center;
+    height: auto;
+    margin-top: 4rem;
+    aside {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid $java;
+        border-radius: 1rem;
+    
+        h2 {
+            justify-content: center;
+            padding: 0 0 1rem;
+        }
+    }
+}
+.btn3{
+
+    @extend %flex;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+    justify-content: center;
+    gap: 1rem;
+    
+    button {
+        color: $brown;
+        height: 2.5rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background: darken($beige, 5%);
+    
+        &:hover {
+            background: darken($beige, 10%);
+        }
+        }
+    
+}
+.graphs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    div{
+        width: 45rem;
+        margin-top: 4rem;
+    }
+}

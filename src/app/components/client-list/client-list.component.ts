@@ -1,3 +1,4 @@
+import { TokenClaim } from './../../services/tokenclaim.service';
 import { ClientListDTO } from './../../model/clientListDTO';
 
 import { Component, OnInit } from '@angular/core';
@@ -14,10 +15,10 @@ export class ClientListComponent implements OnInit {
 
   ClientLists:ClientListDTO[] = [];
   filterText = ""
-  constructor(private dietianClientListService:DietianClientListService) { }
+  constructor(private dietianClientListService:DietianClientListService,private tokenClaim:TokenClaim) { }
 
   ngOnInit(): void {
-    this.getClients(12);
+    this.getClients(this.tokenClaim.getid());
   }
 
   getClients(Id:number){

@@ -1,4 +1,5 @@
 
+
 import { ProfileComponent } from './components/profile/profile.component';
 import { AllergiesComponent } from './components/allergies/allergies.component';
 import { DietListMakerComponent } from './components/diet-list-maker/diet-list-maker.component';
@@ -12,6 +13,8 @@ import { ClientDatasComponent } from './components/client-datas/client-datas.com
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UpdateDefaultDataComponent } from './components/update-default-data/update-default-data.component';
+import { SetAppointmentComponent } from './components/set-appointment/set-appointment.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {path:"",pathMatch:"full", component:HomeComponent},
@@ -21,12 +24,13 @@ const routes: Routes = [
   {path:"profile/update-info", component:UpdateDefaultDataComponent},
   {path:"profile", component:ProfileComponent},
   {path:"apointmentlist", component:AppointmentListComponent},
-  {path:"profile/datas/", component:ClientDatasComponent},
+  {path:"profile/datas", component:ClientDatasComponent},
   {path:"client/client-datas/:clientId", component:ClientDetailsComponent},
   {path:"client/client-details", component:ClientDetailsComponent},
   {path:"DietMaker/:clientId", component:DietListMakerComponent},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
+  {path:"chat/:ReceiverId", component:ChatComponent},
 ];
 
 @NgModule({

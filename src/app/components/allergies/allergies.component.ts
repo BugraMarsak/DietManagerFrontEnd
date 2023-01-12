@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TokenClaim } from './../../services/tokenclaim.service';
 import { ClientAlergiesService } from './../../services/client-alergies.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +22,8 @@ export class AllergiesComponent implements OnInit {
   constructor(
     private allergenService:AllergenService,
     private clientAlergiesService:ClientAlergiesService,
-    private tokenClaim:TokenClaim
+    private tokenClaim:TokenClaim,
+    private snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
@@ -67,6 +69,14 @@ export class AllergiesComponent implements OnInit {
     if(tempData !=null && sameItem == null){
       this.allergenNameArray.push(tempData.allergenName);
       this.allergenArray.push(this.selectedOpt+'');
+      this.snackBar.open('Added List do NOT forget SAVE', 'Close', {
+        duration: 5000
+      });
+    }
+    else if(sameItem != null){
+      this.snackBar.open('That food already in the list!', 'Close', {
+        duration: 5000
+      });
     }
   }
 
@@ -75,9 +85,27 @@ export class AllergiesComponent implements OnInit {
     console.log('this is data : ',this.data);
     
     this.clientAlergiesService.update(this.data).subscribe(res=>{
-      console.log(res);
-      
+      this.snackBar.open('Allergie List saved', 'Close', {
+        duration: 5000
+      });
+    },reserror=>{
+      this.snackBar.open('a problem has occurred', 'Close', {
+        duration: 5000
+      });
     });
+      
+  }
+
+  deleteFromArray(name:string){
+    console.log(name);
+    console.log(this.allergenNameArray.findIndex(x=>x == name));
+    
+    let tempData = this.allergens.find(x=>x.allergenName ==name).id
+    console.log(this.allergenArray.findIndex(x=>x == tempData+""));
+    this.allergenNameArray.splice(this.allergenNameArray.findIndex(x=>x == name),1);
+    this.allergenArray.splice(this.allergenArray.findIndex(x=>x == tempData+""),1);
+    console.log(this.allergenArray);
+    
   }
 
   setfordata(x:string[]){

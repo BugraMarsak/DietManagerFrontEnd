@@ -1,46 +1,52 @@
-<div class="general-div">
-    <div class="under-div">
-        <div class="card">
-            <h1 style="text-align: center; margin-top: 4rem;">Your Allergies</h1>
-            <div class="card-top">
-                <div class="alergies">
-                    <select  [(ngModel)]="selectedOpt" name="" id="">
-                        <option *ngFor="let x of allergens"  [value]="x.id">
-                            {{x.allergenName}}
-                        </option>
-                    </select>
-                    <button  (click)="updatex()">Add</button>
-                    <button (click)="savex()">
-                        Save
-                    </button>
-                </div>
-                <div>
-                    <h2 *ngFor="let x of allergenNameArray">{{x}}</h2>
-                </div>
-            </div>
-            
-            
-        
-            
-            
-            
+<div class="row">
+
+    <div class="col">
+
+        <h2><i class="fa-solid fa-viruses"></i> Your Allergies</h2>
+
+        <!-- Button -->
+        <div class="btn-area">
+            <select [(ngModel)]="selectedOpt">
+                <option *ngFor="let x of allergens" [value]="x.id">
+                    {{x.allergenName}}
+                </option>
+            </select>
+            <button (click)="updatex()"><i class="fa-solid fa-plus fa-lg"></i></button>
+            <button (click)="savex()"><i class="fa-regular fa-floppy-disk fa-lg"></i></button>
         </div>
-        <div>
-            <p style="font-size: 2rem;">About Allergens <br></p>
-            <p style="font-size: 1rem; margin-top: 0.4rem;">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>
-                Vitae ultricies leo integer malesuada nunc. Integer quis auctor elit sed vulputate mi sit amet mauris. Tristique senectus et<br>
-                netus et malesuada fames. Dolor sit amet consectetur adipiscing elit duis tristique. Suscipit tellus mauris a diam maecenas <br>
-                sed enim ut. Turpis massa tincidunt dui ut ornare lectus sit amet. At elementum eu facilisis sed. Iaculis at erat pellentesque <br>
-                adipiscing commodo elit at. Dui sapien eget mi proin sed. Bibendum est ultricies integer quis auctor elit sed vulputate. <br>
-                Dolor sit amet consectetur adipiscing elit ut aliquam purus.</p>
+
+        <!-- List -->
+        <div class="list-area">
+        <ul class="list">
+            <li *ngFor="let x of allergenNameArray"><p>{{x}}</p><button (click)="deleteFromArray(x)"><i class="fa-solid fa-trash-can fa-lg"></i></button>
+            
+        </ul>
         </div>
+
     </div>
-    
+
+    <div class="col">
+
+        <h2><i class="fa-regular fa-file-lines"></i> About Allergens</h2>
+
+        <!-- Content -->
+        <div class="content-area">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum exercitationem deserunt voluptas officiis
+            tempore sint aliquid consequuntur voluptatum aperiam distinctio reiciendis quis aut tempora, fuga cum
+            suscipit quidem aliquam? Odit enim perferendis esse error quaerat dolor rem officiis exercitationem?
+            Possimus, unde ipsam illum earum magni, nulla cumque excepturi dicta ipsum similique consequatur eveniet
+            animi praesentium fuga nesciunt aperiam dolorum minus itaque repudiandae at. Dolore rem doloremque debitis
+            nulla reprehenderit qui facere! Nobis blanditiis, ratione perferendis molestiae sequi assumenda culpa
+            doloremque possimus eveniet ab, ipsum pariatur temporibus doloribus quibusdam iusto, aut consequatur dolore
+            minima ex accusamus suscipit quos molestias numquam. Eaque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eius maiores illo earum quam provident?
+            Provident porro dolorum maiores! Libero fugiat, consectetur adipisci nihil voluptates fuga minima dolore
+            aspernatur numquam officiis dolorum natus praesentium molestias inventore eos veritatis blanditiis quae
+            rerum laboriosam perspiciatis tempora beatae illum dignissimos exercitationem. Ad possimus voluptatum
+            dolores fugit! Dolorum sunt eveniet velit non asperiores corporis ut mollitia ullam temporibus explicabo!
+            Eveniet corrupti veritatis molestiae quaerat nam autem reiciendis ratione corporis, officia dolore vero
+            ipsam rerum quibusdam minus! Possimus maxime rerum recusandae itaque, error cum in voluptas repellat unde
+            nulla excepturi facilis alias, fugit atque. Dicta!</p>
+        </div>
+
+    </div>
 </div>
-
-
-
-
-
-

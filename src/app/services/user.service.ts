@@ -9,6 +9,8 @@ import { ListResponseModel } from '../model/listResponseModel';
 import { ResponseModel } from '../model/responseModel';
 import { ClientAllergies } from '../model/clientAllergies';
 import { DieatianDTO } from '../model/DieatianDTO';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +43,31 @@ export class UserService {
   getDieatianbyId(clientId:number):Observable<SingleResponseModel<DietianClientLists>>{
     let newPath=this.url+"/getDieatianbyId?ClientId="+clientId
     return this.httpClient.get<SingleResponseModel<DietianClientLists>>(newPath);
+  }
+
+  getPdf(): Observable<Blob> {
+    return this.httpClient.get(`https://localhost:7240/api/user?UserId=15`, { responseType: 'blob' }).pipe(
+      map(res => new Blob([res], { type: 'application/pdf' }))
+    );
+  }
+
+  getPdfByName(UserId:number,fileName:string): Observable<Blob> {
+    console.log(`https://localhost:7240/api/user/getByName?UserId=${UserId}&pdfName=${fileName}`);
+    
+    return this.httpClient.get(`https://localhost:7240/api/user/getByName?UserId=${UserId}&pdfName=${fileName}`, { responseType: 'blob' }).pipe(
+      map(res => new Blob([res], { type: 'application/pdf' }))
+    );
+  }
+  getLatestPdf(UserId:number): Observable<Blob> {
+    
+    return this.httpClient.get(`https://localhost:7240/api/user/getLatestPdf?UserId=${UserId}`, { responseType: 'blob' }).pipe(
+      map(res => new Blob([res], { type: 'application/pdf' }))
+    );
+  }
+  
+  getPdfFilesNames(userId:number):Observable<string[]>{
+    let newPath=this.url+"/getFileNames?UserId="+userId
+    return this.httpClient.get<string[]>(newPath);
   }
 
 }

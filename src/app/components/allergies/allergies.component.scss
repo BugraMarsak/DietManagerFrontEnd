@@ -1,34 +1,110 @@
-.alergies{
+@import "../../app.component.scss";
+
+.row, .col, h2, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+.row {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 25% 50%;
+    justify-content: center;
+
+    .col {
+        display: flex;
+        flex-direction: column;
+
+        &:first-child {
+            width: max-content;
+        }
+
+        h2 {
+            @extend %header;
+        }
+    }
+}
+
+// Button
+.btn-area {
     display: flex;
-    flex-direction:column;
-    align-content: space-between;
-gap: 4rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 
-}
-.under-div{
+    @mixin btn($br, $w) {
+        @extend %flex;
+        color: $brown;
+        border: 2px solid $brown;
+        border-radius: $br;
+        background-color: transparent;
+        width: $w;
+        height: 2.5rem;
+        outline: none;
+    }
 
-display: flex;
-    flex-direction:column;
-    align-content: space-between;
-gap: 4rem;
+    select {
+        @include btn(0.5rem, 10rem);
+    }
+
+    button {
+        @include btn(50%, 2.5rem);
+        transition: 0.5s all;
+
+        &:hover {
+            color: $beige;
+            background-color: $brown;
+        }
+    }
 }
 
-.card-top{
-    display: flex;
-    flex-direction:row;
-    align-content: space-between;
-    gap: 8rem;
-    padding: 5rem;
-}
-.general-div{
-    display: flex;
-    align-content: space-between;
-    justify-content:center;
-    
-    margin-top: 7%;
+// List
+.list-area {
 
+    @mixin list($p) {
+        color: $java;
+        padding: $p;
+        transition: 0.5s all;
+    }
+
+    .list {
+        height: 25rem;
+        overflow: auto;
+        border: 2px solid $brown;
+        border-radius: 0.5rem;
+    }
+
+    li {
+        @include list(0.5rem);
+        width: 75%;
+        margin: 0.5rem auto;
+        border-radius: 0.25rem;
+        background: darken($beige, 5%);
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        white-space: nowrap;
+
+        button {
+            @include list(0);
+            border: none;
+            outline: none;
+            opacity: 0.5;
+        }
+
+        &:hover {
+            color: $brown;
+            background: darken($beige, 10%);
+
+            button {
+                color: $brown;
+                opacity: 1;
+            }
+        }
+    }
 }
-select{
-    height: 3rem;
-    width: 10rem;
+
+// Content
+.content-area {
+    color: $brown;
 }

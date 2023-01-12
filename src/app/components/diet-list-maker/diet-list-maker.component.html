@@ -1,84 +1,142 @@
-<div class="container outline">
-  <div class="client-info">
-    
-    <h2>Client Info</h2>
+<section>
 
-    <div style="border-style: groove;
-    border-radius: 5px;">
-      <div style="margin: 2rem;">
-        <div class="card-info">
-          <div>
-            Age
-            <hr>
-            {{clientDefData.age}}
-          </div>
-          <div>
-            Height(m)
-            <hr>
-            {{clientDefData.height}}
-          </div>
-          <div>
-            Gender
-            <hr>
-            {{clientDefData.gender}}
-          </div>
-        </div>
-        <div class="card-info">
-          <div>
-            BKI
-            <hr>
-            {{lastMeas.bki}}
-          </div>
-          <div>
-            Weight(Kg)
-            <hr>
-            {{lastMeas.weight}}
-          </div>
-          <div>
-              IKA
-            <hr>
-            {{lastMeas.ika}}
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  <div cdkDropListGroup class="two-div">
-    <div class="example-container foodlist">
-      <h2 style="text-align: center;">Food List</h2>
+    <!-- Client Info -->
+    <aside>
+        <h2><i class="fa-solid fa-circle-info"></i>Client Info</h2>
+        <div class="info">
+            <div class="info-item">
+                <div><i class="fa-solid fa-cake-candles fa-xl"></i><p>Age</p></div>
+                <hr><p>{{age}}</p>
+            </div>
   
-      <div
-        cdkDropList
-        [cdkDropListData]="todo"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item.foodName}} -  Calories:{{item.calories}}</div>
-      </div>
-    </div>
-    <div class="dietlist">
-      <h2>Diet List</h2>
-      <div *ngFor="let dones of done;let i = index"  class="example-container "> 
-        <label for="">Hour:</label><select (change)="hourChange($event,i)" ><option [value]="hour" *ngFor="let hour of hours">{{hour}}</option></select>
-
-        <label for="">Minute:</label><select (change)="minChange($event,i)" ><option [value]="m" *ngFor="let m of min">{{m}}</option></select>
+            <div class="info-item">
+                <div><i class="fa-solid fa-ruler fa-xl"></i><p>Height (m)</p></div>
+                <hr><p>{{height}}</p>
+            </div>
+  
+            <div class="info-item">
+                <div><i class="fa-solid fa-venus-mars fa-xl"></i><p>Gender</p></div>
+                <hr><p>{{gender}}</p>
+            </div>
+  
+            <div class="info-item">
+                <div><i class="fa-solid fa-child-reaching fa-xl"></i><p>BKI</p></div>
+                <hr><p>{{bki}}</p>
+            </div>
+  
+            <div class="info-item">
+                <div><i class="fa-solid fa-weight-hanging fa-xl"></i><p>Weight (kg)</p></div>
+                <hr><p>{{weight}}</p>
+            </div>
+  
+            <div class="info-item">
+                <div><i class="fa-solid fa-bone fa-xl"></i><p>IKA</p></div>
+                <hr><p>{{ika}}</p>
+            </div>
+        </div>
+        <div>
+            
+            <h2><i class="fa-solid fa-circle-info"></i>Notes your take <a style="margin-left: 6rem;" (click)="showDialog2()"><i class="fa-solid fa-pen-to-square"></i></a> </h2>
+        </div>
         
-        <button (click)="deleteThis(i)">delete</button>
-        <div
-          cdkDropList
-          [cdkDropListData]="done[i]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box"*ngFor="let item of dones"  cdkDrag>{{item.foodName}} -  Calories:{{item.calories}}</div>
+        
+        <div class="list">
+            
+            <div class="list-item">
+
+                <button class="notes" (click)="showDialog(x)" *ngFor="let x of notesList" icon="pi pi-external-link" label="Show">Note Name:{{x.notesName}} - Note Create Time:{{x.noteTime.toString().substring(0,10)}}</button>
+
+                
+            </div>
         </div>
-      </div>
-      
-      <button (click)="test()">Add new meal</button>
-      <button (click)="saveDietList()">Save List</button>
-    </div>
-   
-
-
-  </div>
+        
+    </aside>
   
-</div>
+    <ng-container cdkDropListGroup>
+  
+        <!-- Food List -->
+        <aside>
+            <h2><i class="fa-solid fa-utensils"></i>Food List</h2>
+            <div class="list-food">
+                <label>Food Name</label>
+                <input [(ngModel)]="foodFilter" type="text" placeholder="Write food name">
+                <label>Calories</label>
+                <input [(ngModel)]="calorieFilter" type="number" placeholder="Enter calorie value">
+            </div>
+    
+            <div class="list-food-item" cdkDropList [cdkDropListData]="todo " cdkDropListConnectedTo="list-diet-item" (cdkDropListDropped)="drop($event)">
+                <p *ngFor="let item of todo | foodfilter:foodFilter | caloriesfilter:calorieFilter" cdkDrag>
+                    <span>{{item.foodName}}</span>
+                    <span>|</span>
+                    <span>Calories : {{item.calories}}</span>
+                </p>
+            </div>
+        </aside>
+        <!-- Diet Lists -->
+        <aside>
+            <h2><i class="fa-solid fa-cookie-bite"></i>Diet Lists</h2>
+    
+            <div class="button">
+                <button (click)="test()">Add New Meal</button>
+                <button (click)="saveDietList()">Save List</button>
+            </div>
+    
+            <div class="list-diet">
+                <ng-container *ngFor="let dones of done;let i = index">
+                    <div class="list-diet-time">
+                        <label>Hour</label>
+                        <select (change)="hourChange($event,i)">
+                            <option [value]="hour" *ngFor="let hour of hours">{{hour}}</option>
+                        </select>
+                        <label>Minute</label>
+                        <select (change)="minChange($event,i)">
+                            <option [value]="m" *ngFor="let m of min">{{m}}</option>
+                        </select>
+                        <button (click)="deleteThis(i)"><i class="fa-solid fa-trash-can fa-lg"></i></button>
+                    </div>
+    
+                    <div class="list-diet-item" cdkDropList [cdkDropListData]="done[i]" (cdkDropListDropped)="drop($event)">
+                        <p *ngFor="let item of dones" cdkDrag>
+                            <span>{{item.foodName}}</span>
+                            <span>|</span>
+                            <span>Calories : {{item.calories}}</span>
+                            
+                        </p>
+                        <p *ngIf="done[i].length==0">No Item in List</p>
+
+                    </div>
+                </ng-container>
+            </div>
+        </aside>
+    </ng-container>
+  </section>
+
+  <!-- Notes Shower -->
+  <p-dialog header="Notes" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw',height:'25vw'}"  class="my-dialog" [(visible)]="display" [modal]="true"  
+  [draggable]="false" >
+    <div  >
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo vel fringilla est ullamcorper eget nulla. Accumsan tortor posuere ac ut consequat semper. Adipiscing elit ut aliquam purus sit amet luctus venenatis. Blandit aliquam etiam erat velit scelerisque in dictum non. Pharetra massa massa ultricies mi quis hendrerit. Egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium. Nisl nunc mi ipsum faucibus vitae aliquet. Risus sed vulputate odio ut enim blandit volutpat maecenas volutpat. Magna ac placerat vestibulum lectus mauris ultrices. Condimentum mattis pellentesque id nibh tortor. Turpis massa sed elementum tempus egestas. In arcu cursus euismod quis viverra. Aliquam sem et tortor consequat id porta nibh venenatis.</p> -->
+      <p *ngIf="selectedNote">{{selectedNote.note}}</p>
+    </div>
+  </p-dialog>
+  <!--/Notes Shower -->
+
+  <!-- Notes taker -->
+  <p-dialog header="Take a Note" [(visible)]="display2" [breakpoints]="{'1100px': '75vw', '840px': '100vw'}"  [modal]="true"  
+  [draggable]="false" >
+    <div class="note-input">
+        <div style="margin-top: 2rem;">
+            <label  for="noteName">Note name:</label>
+            <input type="text"  [(ngModel)]="noteName" name="noteName" id="noteName" placeholder="Note name">
+        </div>
+        <label style="margin: 0.8rem 0rem 0.4rem;" for="pInputTextarea">Note:</label>
+        <div >
+            <textarea style="height: 25px;width: max-content;" [(ngModel)]="note" [rows]="5" [cols]="80" pInputTextarea [autoResize]="true"> </textarea>   
+        </div>
+        <div style="text-align: end; margin-top: 1rem;">
+            <button class="save-btn" (click)="saveNotes()">save</button>
+        </div>
+        
+    </div>
+  </p-dialog>
+<!-- Notes taker -->

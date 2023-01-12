@@ -1,55 +1,120 @@
-<div class="flex-cont">
-    <div class="flex-cont-item">
-        
-        <div class="head">
-            <h1>Info</h1>
-            <button mat-flat-button class="btn-options" color="primary" routerLink="/profile/update-info" >Edit</button>
-        </div>
-        <div style="border-style: solid; width: 15rem;">
-            <div class="border-content">
-                <div class="border-content-detail">
-                    <div>Age : {{clientDefaultData.age}}</div>
-                    <div>Height : {{height}}</div>
-                    <div>Gender : {{clientDefaultData.gender}}</div>
-                </div>
+<section id="testt">
 
-            </div>
-        
-        </div>
-    </div>
-    <div class="flex-cont-item">
-        <div class="head">
-            <h1>Allergies</h1>
-            <button mat-flat-button class="btn-options" color="primary" routerLink="/profile/allergies">Edit</button>
-        </div>
-        <div style="border-style: solid; width: 15rem;">
-            <div class="border-content">
-                <div class="border-content-detail">
-                    <h3  *ngFor="let x of allergenNameArray">
-                        {{x}}
-                    </h3>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-    <div class="flex-cont-item">
-        <div class="head">
-            <h1>Diet Lists</h1>
-            <button mat-flat-button class="btn-options" color="primary">Edit</button>
-        </div>
-    <div style="border-style: solid; width: 15rem;">
-        
-        <div class="border-content">
-            <div class="border-content-detail">
-                <div *ngFor="let x of clientDietList">
-                    
-                    <button style="background-color: #C7BEA2; border: solid;" mat-button (click)="openDialog(x.session)">{{x.dietDate.toString().slice(0,10)}} Diet List</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-</div>
+    <!-- Info -->
+    <aside>
+        <h2><i class="fa-solid fa-circle-info"></i> Info</h2>
+        <div class="info">
+            <a routerLink="/profile/update-info"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+            <i class="fa-solid fa-cake-candles fa-2xl"></i>
+            <p>Age</p>
+            <p>:</p>
+            <p>{{age}}</p>
 
+            <i class="fa-solid fa-ruler fa-2xl"></i>
+            <p>Height</p>
+            <p>:</p>
+            <p>{{height}}</p>
+
+            <i class="fa-solid fa-venus-mars fa-2xl"></i>
+            <p>Gender</p>
+            <p>:</p>
+            <p>{{gender}}</p>
+        </div>
+
+
+        
+        <h2><i class="fa-solid fa-file-lines"></i>Blood Test Results  <button (click)="showDialog2()"><i class="fa-solid fa-plus"></i></button></h2>
+        
+        <div class="list">
+            <div class="list-item2">
+                <button *ngFor="let item of PDFFilesNames" (click)="getPdf(item)" icon="pi pi-external-link" label="Show">{{item}}</button>
+            </div>
+        </div>
+        <h2><i class="fa-solid fa-calendar-check"></i>Your next Appointment</h2>
+        <div class="list">
+            <div class="list-item2" *ngIf="appointment">
+                <button *ngFor="let item of PDFFilesNames" icon="pi pi-external-link" label="Show" style="height: 4rem;">Next Appointment Date:{{appointment.appointmentDate.toString().substring(0,10)}} {{appointment.appointmentDate.toString().substring(11,16)}}<br> For {{appointment.appointmentType}}</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Allergies -->
+    <aside>
+        
+        <h2><i class="fa-solid fa-hand-dots"></i> Allergies</h2>
+        <div class="list">
+            <a routerLink="/profile/allergies"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+            <div class="list-item">
+                <p *ngFor="let allergenNames of allergenNameArray">{{allergenNames}}</p>
+                
+            </div>
+        </div>
+        
+    </aside>
+
+    <!-- Diet Lists -->
+    <aside>
+        <h2><i class="fa-solid fa-cookie-bite"></i> Diet Lists</h2>
+        <div class="list">
+            <!-- <a routerLink="/DietMaker/1002"><i class="fa-solid fa-pen-to-square fa-xl"></i></a> -->
+            <div class="list-item">
+                <button *ngFor="let item of clientDietList" (click)="getSession(item.session)" icon="pi pi-external-link" label="Show">{{item.dietDate.toString().substring(0,10)}} Diet List</button>
+            </div>
+        </div>
+    </aside>
+    
+</section>
+
+
+
+<p-dialog  header="Diet List"  [(visible)]="display" [modal]="true" 
+    [draggable]="false" >
+    <div id="diet-list-pdf" style="width:595px; height: 842px;">
+        <div style="display: flex;flex-direction: column;flex-wrap: wrap; width:295px;height: 842px;">
+            <div  *ngFor="let item of dietList" >
+                <div >
+                    <h3><b>{{item.dietDate.toString().slice(11).slice(0,5)}}</b></h3>
+                    <h4 *ngFor="let x of item.foodNames">{{x}}</h4>
+                </div>
+            </div>  
+            <div  *ngFor="let item of dietList" >
+                <div >
+                    <h3><b>{{item.dietDate.toString().slice(11).slice(0,5)}}</b></h3>
+                    <h4 *ngFor="let x of item.foodNames">{{x}}</h4>
+                </div>
+            </div>  
+            <div  *ngFor="let item of dietList" >
+                <div >
+                    <h3><b>{{item.dietDate.toString().slice(11).slice(0,5)}}</b></h3>
+                    <h4 *ngFor="let x of item.foodNames">{{x}}</h4>
+                </div>
+            </div>  
+        </div>
+        
+       
+    </div>
+    
+    <button (click)="downloadPdf()">indir</button>
+</p-dialog>
+
+
+<p-dialog header="Upload PDF" [(visible)]="display2" [modal]="true" 
+    [draggable]="false" >
+    <div class="div-upload">
+        <p-fileUpload name="file" url="https://localhost:7240/api/user/savepdf?UserId={{profileId}}" (onUpload)="onUpload($event)"
+        accept="application/pdf" >
+       <ng-template pTemplate="content">
+           <ul *ngIf="uploadedFiles.length">
+               <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+           </ul>
+       </ng-template>
+</p-fileUpload>
+    </div>
+   
+</p-dialog>
+
+<p-dialog header="PDF Shower" (onHide)="setPdfUrl()"  [(visible)]="display3" [modal]="true" 
+    [draggable]="false" >
+    <iframe *ngIf="pdfUrl" [src]="pdfUrl "></iframe>
+</p-dialog>
 

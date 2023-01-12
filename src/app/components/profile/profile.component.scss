@@ -1,28 +1,123 @@
-.flex-cont{
-    display: flex;
-    justify-content:space-evenly;
+@import "../../app.component.scss";
 
+* {
+    transition: 0.5s all;
 }
-.head{
-    display: flex;
-    justify-content:space-between;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-.btn-options{
+
+section {
     height: 100%;
-}
-.border-content{
-    text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-.border-content-detail{
     display: flex;
-    justify-content:space-evenly;
-    flex-direction: column;
-    gap: 2rem;
-   
-}
+    justify-content: space-evenly;
 
+    aside {
+        width: clamp(20%, 25%, 30%);
+
+        h2 {
+            @extend %header;
+            button{
+                margin-left: 3rem;
+                @extend %flex;
+                color: $brown;
+                border: 2px solid $brown;
+                border-radius: 50%;
+                background-color: transparent;
+                width: 2.5rem;
+                height: 2.5rem;
+                outline: none;
+            }
+        }
+
+        &:hover a {
+            opacity: 1;
+        }
+
+        a {
+            position: absolute;
+            top: -1rem;
+            right: 0;
+            color: $brown;
+            opacity: 0.1;
+        }
+
+        // Info
+        .info {
+            @extend %card;
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(4, max-content);
+            gap: 2rem 3rem;
+        }
+
+        // Allergies / Diet Lists / Blood Test Results
+        .list {
+            @extend %card;
+
+            &-item {
+                width: 90%;
+                height: 50vh;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                p, button {
+                    height: 2.5rem;
+                    max-width: 95%;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    border-radius: 0.5rem;
+                    background: darken($beige, 5%);
+
+                    &:hover {
+                        background: darken($beige, 10%);
+                    }
+                }
+            }
+            &-item2 {
+                width: 90%;
+                height: 25vh;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                p, button {
+                    height: 2.5rem;
+                    max-width: 95%;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    border-radius: 0.5rem;
+                    background: darken($beige, 5%);
+
+                    &:hover {
+                        background: darken($beige, 10%);
+                    }
+                }
+            }
+        }
+    }
+}
+::ng-deep .p-dialog{
+    ::ng-deep .p-fileupload-buttonbar{
+        
+        margin-top: 3rem;
+        display: flex;
+        justify-content: space-between;
+    }
+    ::ng-deep .p-fileupload-row{
+        div:first-child{
+            display: none;
+        }
+        margin-top: 2rem; 
+    }
+    .div-upload{
+        width: 25rem;
+        height: 10rem;
+    }
+    iframe{
+        margin-top: 1rem;
+        width: 49rem;
+        height: 49rem;
+    }
+}
 

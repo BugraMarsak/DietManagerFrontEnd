@@ -1,3 +1,5 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Notes } from './../../model/Notes';
 import { ClientDefaultData } from './../../model/clientDefaultData';
 import { MeasurementResultService } from './../../services/measurement-result.service';
 import { TokenClaim } from './../../services/tokenclaim.service';
@@ -9,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClientDietList } from 'src/app/model/clientDietList';
 import { ClientDietListService } from 'src/app/services/client-diet-list.service';
 import { MeasurementResult } from 'src/app/model/measurementResult';
+import { NotesService } from 'src/app/services/notes.service';
 
 @Component({
   selector: 'app-diet-list-maker',
@@ -22,13 +25,18 @@ export class DietListMakerComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private clientDietListService:ClientDietListService,
     private measurementResultService:MeasurementResultService,
-    private tokenClaim:TokenClaim) { }
+    private tokenClaim:TokenClaim,
+    private notesService:NotesService,
+    private snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
     this.getClientId()
     
   }
   
+  foodFilter:string=""
+  calorieFilter:string=""
 
   todo:FoodListModel[] = [];
   temparr:FoodListModel[]=[];
@@ -41,6 +49,8 @@ export class DietListMakerComponent implements OnInit {
   lastMeas:MeasurementResult;
   clientDefData:ClientDefaultData
   drop(event: CdkDragDrop<any[]>) {
+    console.log(1);
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -51,35 +61,54 @@ export class DietListMakerComponent implements OnInit {
         event.currentIndex,
       );
     }
+    
     this.todo = this.temparr.slice(0)
-    // this.todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep']
   }
 
   getClientId(){
     this.activatedRoute.params.subscribe(params =>{
       this.clientId = params["clientId"];
       this.getFoodList(params["clientId"]);
+      this.getNotes()
       this.getClientInfo(params["clientId"]);
     })
   }
 
   getFoodList(clientId:number){
+    console.log(clientId);
+    
     this.foodListService.getAllFoodWithoutAllergens(clientId).subscribe((res)=>{
       this.temparr = res.data.slice(0);
       this.todo = res.data;
-      console.log(res.data);
       
 
     })
   }
 
+
+  age:string="";
+  gender:string="";
+  height:string="";
+  bki:string="";
+  weight:string="";
+  ika:string="";
   getClientInfo(id:number){
     this.measurementResultService.getbyIdLastMeas(id).subscribe(res=>{
       this.lastMeas=res.data
+      this.bki = res.data.bki+""
+      this.weight = res.data.weight+""
+      this.ika = res.data.ika +""
     })
     this.measurementResultService.getClientDefData(id).subscribe(res=>{
       this.clientDefData = res.data      
-      
+      this.age = ''+res.data.age
+      this.gender = ''+res.data.gender
+      if(+res.data.height.toString().split(".")[1]<10){
+        this.height = (res.data.height+"0")
+      }else{
+        this.height = res.data.height+""
+      }
+       
     })
   }
 
@@ -92,7 +121,7 @@ export class DietListMakerComponent implements OnInit {
 
   test(){
     this.done.push([])
-    console.log(this.temparr);
+    console.log(this.done);
     this.hourMinHolder.push(["00","00"])
     console.log(this.hourMinHolder);
   }
@@ -101,7 +130,6 @@ export class DietListMakerComponent implements OnInit {
     
     
     let tempArray:ClientDietList[]=[]
-    
 
     for(let i=0;i<this.done.length;i++){
       let res:string=""
@@ -118,26 +146,81 @@ export class DietListMakerComponent implements OnInit {
       now.setMinutes(+this.hourMinHolder[i][1]);
       console.log(now);
       let resx:ClientDietList = { id:0,
-        dietitianId:this.tokenClaim.getid(),
-        clientId:this.clientId,
+        dietitianId:+this.tokenClaim.getid(),
+        clientId:+this.clientId,
         dietInfo:res,
         dietDate:now,
         note:" ",
-        session:0
+        session:0,
+        foodNames:['']
       }
       tempArray.push(resx);
-      console.log(resx);
       
       
     }
-
-      this.clientDietListService.add(tempArray).subscribe();
-      
-
+    console.log(tempArray);
     
-    
+      this.clientDietListService.add(tempArray).subscribe(res=>{
+        this.snackBar.open('Diet List saved', 'Close', {
+          duration: 5000
+        });
+      },reserror=>{
+        this.snackBar.open('a problem has occurred', 'Close', {
+          duration: 5000
+        });
+      });
+  }
+  display:boolean=false;
+  display2:boolean=false;
+  notesList:Notes[]=[]
+  getNotes(){
+    this.notesService.getByIds(this.clientId,this.tokenClaim.getid()).subscribe(res=>{
+    this.notesList = res.data;
+    console.log(res.data[0]);
+  })
   }
 
+  noteName:string="";
+  note:string=" ";
+  saveNotes(){
+    let tempNote:Notes={
+    notesName:this.noteName,
+    note:this.note,
+    dietianId:this.tokenClaim.getid(),
+    clientId:this.clientId
+    };
+
+    this.notesService.add(tempNote).subscribe(res=>{
+      this.snackBar.open('Note saved', 'Close', {
+        duration: 5000
+      });
+    },reserror=>{
+        this.snackBar.open('a problem has occurred', 'Close', {
+          duration: 5000
+        });
+      });
+    this.display2=false;
+  }
+
+
+  selectedNote:Notes
+  showDialog(item:Notes){
+    this.selectedNote = item
+    this.display=true;
+  }
+
+  showDialog2(){
+    
+    this.display2=true;
+    setTimeout(() => {
+      let input = document.querySelector('.p-inputtextarea') as HTMLElement | null;;
+      if(input !=null){
+        input.focus()
+      }
+    }, 50);
+    
+
+  }
   deleteThis(i:number){
     let temparr = this.done.slice(0)
     temparr.splice(i,1)

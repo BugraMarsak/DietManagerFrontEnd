@@ -17,9 +17,9 @@ export class FoodListService {
     get<ListResponseModel<FoodListModel>>(this.url)
   }
 
-  getAllFoodWithoutAllergens(clientId:number):Observable<ListResponseModel<FoodListModel>>{
+  getAllFoodWithoutAllergens(clientId:number):Observable<ListResponseModel<FoodListModel>>{    
     return this.httpClient.
-    get<ListResponseModel<FoodListModel>>(`${this.url}/GetAllWithoutAllergens?Id=${clientId}`)
+    get<ListResponseModel<FoodListModel>>(`${this.url}/GetAllWithoutAllergens?UserId=${clientId}`)
   }
 
 }

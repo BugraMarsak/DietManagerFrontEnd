@@ -1,12 +1,27 @@
-<div class=" container">
-  <!-- ilk elemanin left margini 2  olacak sekilde ayarlanacak -->
+<div class="list">
+  <p-calendar (onSelect)="getTodayAppointments()" [(ngModel)]="selectedDate"></p-calendar>
+  <div class="list-appointment" *ngFor="let hour of hours;let i =index" >
+    <hr style="width:100%; height: 2px;">
+    <h2 style="margin-top: 2rem;">{{this.selectedDate.getDate()}}/{{(this.selectedDate.getMonth()+1)<10?"0"+(this.selectedDate.getMonth()+1):(this.selectedDate.getMonth()+1)}}/{{this.selectedDate.getFullYear()}} - Hour : {{hour}}</h2>
+    <div class="appointments">
+      <mat-card class="card"  *ngFor="let appointment of Appointments[i]">
+        <mat-card-title>{{appointment.fullName}}</mat-card-title>
+        <mat-card-actions>
+          <h4>Appointment time : <b>{{appointment.appointmentDate.toString().substring(11,16)}}</b></h4>
+          <button class="det-btn" routerLink="/client/client-datas/{{appointment.clientId}}" mat-button><a >Check Client Details</a></button>
+        </mat-card-actions>
+      </mat-card>
+      <h1 *ngIf="checkLength(Appointments[i])" style="margin: 4rem 0 4rem;"><b> This Hour you have not appointment</b></h1>
+      
+      
+  </div>
+  </div>
 
-  <mat-card class="card" *ngFor="let x of ClientLists" >
+ 
+  <!-- <mat-card class="card" *ngFor="let x of ClientLists" >
       <mat-card-title>{{x.clientFullName}}</mat-card-title>
       <mat-card-actions>
         <button class="det-btn" mat-button><a routerLink="/client/client-datas/{{x.clientId}}">Check Client Details</a></button>
       </mat-card-actions>
-  </mat-card>
-                          
-          
+  </mat-card> -->
 </div>

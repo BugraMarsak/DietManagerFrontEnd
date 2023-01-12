@@ -1,3 +1,4 @@
+import { TokenClaim } from './../../services/tokenclaim.service';
 import { MeasurementResultService } from './../../services/measurement-result.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,23 +18,38 @@ export class ClientDatasComponent implements OnInit {
   bodyFatRatioDataY:number[]=[]
   ikaDataY:number[]=[]
   constructor(
-    private measurementResultService:MeasurementResultService
+    private measurementResultService:MeasurementResultService,
+    private tokenClaim:TokenClaim
     ) { }
 
   ngOnInit(): void {
-this.x()
-
+    this.x(this.tokenClaim.getid())
   }
 
   
   title = 'dynamic-plots';
-  // Bar Chart
   graph1:any
   graph2:any
   graph3:any
   graph4:any
-  x(){
-    this.measurementResultService.getByClientId(1002).subscribe(res=>{
+  visceralFatLevel:string=""
+  targetVisceralFatLevel:string=""
+  weight:string=""
+  targetWeight:string=""
+  bodyFatWeight:string=""
+  mineral:string=""
+  totalBodyWater:string=""
+  protein:string=""
+  x(id:number){
+    this.measurementResultService.getByClientId(id).subscribe(res=>{
+      this.visceralFatLevel = res.data[res.data.length-1].visceralFatLevel+""
+      this.targetVisceralFatLevel =res.data[res.data.length-1].targetVisceralFatLevel+""
+      this.weight=res.data[res.data.length-1].weight+""
+      this.targetWeight=res.data[res.data.length-1].targetWeight+""
+      this.bodyFatWeight=res.data[res.data.length-1].bodyFatWeight+""
+      this.mineral=res.data[res.data.length-1].mineral+""
+      this.totalBodyWater=res.data[res.data.length-1].totalBodyWater+""
+      this.protein =res.data[res.data.length-1].protein+""
       res.data.forEach(element => {
         console.log(element);
         
@@ -50,7 +66,8 @@ this.x()
       
       this.graph1 = {
         data: [
-          { x:  this.dateArrayX, y:this.WeightDataY, type: 'scatter' },
+          { x:  this.dateArrayX, y:this.WeightDataY, type: 'scatter' }
+          // ,{x:this.dateArrayX,y:[40,40]}
         ],
         layout: {title: 'Weight Data'}
       };
@@ -74,7 +91,6 @@ this.x()
       };
     })
   }
-
 
 
 }
